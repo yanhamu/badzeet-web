@@ -11,6 +11,7 @@ import { ExpensesComponent } from './pages/expenses/expenses.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { NewExpenseComponent } from './new-expense/new-expense.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     DashboardComponent,
     ExpensesComponent,
+    NewExpenseComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,11 +4,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ExpensesComponent } from './pages/expenses/expenses.component';
+import { NewExpenseComponent } from './new-expense/new-expense.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'expenses', component: ExpensesComponent },
+  { path: 'new-expense', component: NewExpenseComponent },
 ];
 
 @NgModule({

@@ -3,10 +3,12 @@
   width: 100%;
 }
 
-.container a {
+.container > a {
   margin-right: 10px;
 }
 
+
 .right {
   margin-left: auto;
+  margin-right: 0px;
 }

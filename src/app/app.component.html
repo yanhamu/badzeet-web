@@ -1,9 +1,9 @@
 <mat-toolbar *ngIf='isLogged()'>
-  <a mat-button href="/">Badzeet</a>
   <div class="container">
-    <a mat-raised-button href="/expenses">Expenses</a>
-    <a mat-raised-button color="primary" href="/expenses">Record</a>
-    <a mat-raised-button class='right' color="primary" href="/expenses">Logout</a>
+    <a mat-button href="/">Badzeet</a>
+    <a mat-button href="/expenses">Expenses</a>
+    <a mat-button color="primary" href="/new-expense">Record</a>
+    <button mat-button class='right' color="primary" href="/expenses">Logout</button>
   </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
