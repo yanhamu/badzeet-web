@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
-const loginUrl = 'api/login';
+const loginUrl = 'https://localhost:44373/api/login';
 
 @Injectable({
   providedIn: 'root',
@@ -12,22 +12,7 @@ export class AuthClientService {
   constructor(private httpClient: HttpClient) {}
 
   login(credentials: LoginCredentials): Observable<LoginResult> {
-    return this.httpClient
-      .post<LoginResult>(loginUrl, credentials, {
-        observe: 'response',
-      })
-      .pipe(
-        map((x) => {
-          if (x.status == 200) {
-            return { ...x.body };
-          }
-          if (x.status == 401) {
-            return { token: null, username: null, userid: null };
-          }
-          console.error('login failed');
-          return { token: null, username: null, userid: null };
-        })
-      );
+    return this.httpClient.post<LoginResult>(loginUrl, credentials);
   }
 }
 

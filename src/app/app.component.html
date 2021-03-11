@@ -1,2 +1,9 @@
-<h1>Badzeet</h1>
+<mat-toolbar *ngIf='isLogged()'>
+  <a mat-button href="/">Badzeet</a>
+  <div class="container">
+    <a mat-raised-button href="/expenses">Expenses</a>
+    <a mat-raised-button color="primary" href="/expenses">Record</a>
+    <a mat-raised-button class='right' color="primary" href="/expenses">Logout</a>
+  </div>
+</mat-toolbar>
 <router-outlet></router-outlet>
