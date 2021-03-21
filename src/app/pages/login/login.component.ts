@@ -27,23 +27,19 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response) => {
           this.userService.setUser({
-            username: response.username,
-            userid: response.userid,
+            userId: response.userId,
             token: response.token,
           });
           this.router.navigate(['dashboard']);
         },
         (err) => {
           if (err.status == 403) {
-            console.log('asdf');
-            this.password.hasError;
             this.password.setErrors({
               password: 'invalid username or password',
             });
             this.password.markAllAsTouched();
             return;
           }
-          console.error('component error');
           console.error(err);
         }
       );

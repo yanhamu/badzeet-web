@@ -30,7 +30,6 @@ export class UserService {
 }
 
 export interface User {
-  username: string;
-  userid: string;
+  userId: string;
   token: string;
 }

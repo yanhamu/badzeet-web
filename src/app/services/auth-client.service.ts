@@ -23,6 +23,5 @@ export interface LoginCredentials {
 
 interface LoginResult {
   token: string;
-  userid: string;
-  username: string;
+  userId: string;
 }
