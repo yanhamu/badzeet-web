@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-const loginUrl = 'https://localhost:44373/api/login';
+const loginUrl = 'https://localhost:44373/api/tokens';
 
 @Injectable({
   providedIn: 'root',

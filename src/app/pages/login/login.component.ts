@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  AuthClientService,
-  LoginCredentials,
-} from 'src/app/services/auth-client.service';
+import { AuthClientService } from 'src/app/services/auth-client.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +10,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  credentials: LoginCredentials = { username: '', password: '' };
+  password: FormControl = new FormControl('', [Validators.required]);
+  username: FormControl = new FormControl('', [Validators.required]);
 
   constructor(
     private authClient: AuthClientService,
@@ -23,19 +22,30 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    this.authClient.login(this.credentials).subscribe(
-      response => {
-        this.userService.setUser({
-          username: response.username,
-          userid: response.userid,
-          token: response.token,
-        });
-        this.router.navigate(['dashboard']);
-      },
-      (err) => {
-        console.error('component error');
-        console.error(err);
-      }
-    );
+    this.authClient
+      .login({ username: this.username.value, password: this.password.value })
+      .subscribe(
+        (response) => {
+          this.userService.setUser({
+            username: response.username,
+            userid: response.userid,
+            token: response.token,
+          });
+          this.router.navigate(['dashboard']);
+        },
+        (err) => {
+          if (err.status == 403) {
+            console.log('asdf');
+            this.password.hasError;
+            this.password.setErrors({
+              password: 'invalid username or password',
+            });
+            this.password.markAllAsTouched();
+            return;
+          }
+          console.error('component error');
+          console.error(err);
+        }
+      );
   }
 }

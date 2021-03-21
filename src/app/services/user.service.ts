@@ -17,11 +17,15 @@ export class UserService {
     }
 
     const localStorageUser = window.localStorage.getItem('user');
-    if(localStorageUser != null){
+    if (localStorageUser != null) {
       this.user = JSON.parse(localStorageUser);
     }
 
     return this.user;
+  }
+
+  logOut(): void {
+    this.setUser(null);
   }
 }
 

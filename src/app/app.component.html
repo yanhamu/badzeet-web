@@ -1,9 +1,26 @@
-<mat-toolbar *ngIf='isLogged()'>
+<mat-toolbar *ngIf="isLogged()">
   <div class="container">
     <a mat-button href="/">Badzeet</a>
     <a mat-button href="/expenses">Expenses</a>
     <a mat-button color="primary" href="/new-expense">Record</a>
-    <button mat-button class='right' color="primary" href="/expenses">Logout</button>
+    <button
+      mat-button
+      class="right"
+      color="primary"
+      href="/expenses"
+      (click)="logOut()"
+    >
+      Logout
+    </button>
   </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
+
+<div *ngIf="isLogged() == false">
+  <mat-toolbar>
+    <div class="container">
+      <a mat-button href="/">Badzeet</a>
+    </div>
+  </mat-toolbar>
+  <app-login></app-login>
+</div>
