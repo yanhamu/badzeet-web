@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { AuthModule, LogLevel, OidcConfigService, OidcSecurityService } from 'angular-auth-oidc-client';
-import { map, switchMap } from 'rxjs/operators';
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
     return () => oidcConfigService.withConfig({
@@ -13,7 +12,7 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
         responseType: 'code',
         silentRenew: true,
         silentRenewUrl: `${window.location.origin}/silent-renew.html`,
-        logLevel: LogLevel.Debug,
+        logLevel: LogLevel.Warn,
     });
 }
 
