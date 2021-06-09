@@ -5,7 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTableModule } from '@angular/material/table';
 
 const modules = [
   MatFormFieldModule,
@@ -15,6 +16,7 @@ const modules = [
   MatIconModule,
   MatSelectModule,
   MatButtonToggleModule,
+  MatTableModule,
 ];
 
 @NgModule({
@@ -22,4 +24,4 @@ const modules = [
   imports: [modules],
   exports: modules,
 })
-export class AppMaterialModule {}
+export class AppMaterialModule { }

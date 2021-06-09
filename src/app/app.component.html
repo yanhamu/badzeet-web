@@ -14,7 +14,6 @@
     </button>
   </div>
 </mat-toolbar>
-<router-outlet></router-outlet>
 
 <div *ngIf="isLogged() == false">
   <mat-toolbar>
@@ -24,3 +23,5 @@
   </mat-toolbar>
   <app-login></app-login>
 </div>
+
+<router-outlet></router-outlet>

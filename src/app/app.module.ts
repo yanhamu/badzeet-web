@@ -6,20 +6,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ExpensesComponent } from './pages/expenses/expenses.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NewExpenseComponent } from './new-expense/new-expense.component';
 import { AuthHttpConfigModule } from './auth/auth-http-config.module';
 import { httpInterceptorProviders } from './http-interceptors';
+import { PaymentsComponent } from './payments/payments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    ExpensesComponent,
     NewExpenseComponent,
+    PaymentsComponent,
   ],
   imports: [
     BrowserModule,

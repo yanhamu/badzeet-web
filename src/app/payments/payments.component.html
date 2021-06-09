@@ -1,0 +1,34 @@
+<p>payments works!</p>
+<table>
+    <tr *ngFor="let p of payments">
+        <td>{{p.Description}}</td>
+        <td>{{p.Amount}}</td>
+        <td>{{p.CategoryId}}</td>
+        <td>{{p.UserId}}</td>
+    </tr>
+</table>
+
+<table mat-table [dataSource]="payments">
+    <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.Description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.Amount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <td mat-cell *matCellDef="let element"> {{element.CategoryId}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['Id','description', 'amount']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['Id','description','amount'];"></tr>
+</table>
