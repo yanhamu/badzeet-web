@@ -1,21 +1,20 @@
-<mat-toolbar *ngIf="isLogged()">
+<mat-toolbar *ngIf="isAuthenticated">
   <div class="container">
     <a mat-button href="/">Badzeet</a>
-    <a mat-button href="/expenses">Expenses</a>
+    <a mat-button href="/payments">Payments</a>
     <a mat-button color="primary" href="/new-expense">Record</a>
     <button
       mat-button
       class="right"
       color="primary"
-      href="/expenses"
+      href="/payments"
       (click)="logOut()"
     >
       Logout
     </button>
   </div>
 </mat-toolbar>
-
-<div *ngIf="isLogged() == false">
+<div *ngIf="isAuthenticated == false">
   <mat-toolbar>
     <div class="container">
       <a mat-button href="/">Badzeet</a>

@@ -13,6 +13,7 @@ import { NewExpenseComponent } from './new-expense/new-expense.component';
 import { AuthHttpConfigModule } from './auth/auth-http-config.module';
 import { httpInterceptorProviders } from './http-interceptors';
 import { PaymentsComponent } from './payments/payments.component';
+import { PaymentsService } from './payments/payments.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { PaymentsComponent } from './payments/payments.component';
     AuthHttpConfigModule,
   ],
   exports: [AppMaterialModule],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, PaymentsService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

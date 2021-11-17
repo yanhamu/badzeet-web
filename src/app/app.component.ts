@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(private userService: UserService, private router: Router) {}
+
+  constructor(private router: Router,
+    private oidcSecurityService: OidcSecurityService) { }
   title = 'badzeet-web';
-  isLogged(): boolean {
-    return this.userService.getUser() != null;
+  isAuthenticated = false;
+
+  ngOnInit() {
+    this.oidcSecurityService.checkAuth().subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+    });
   }
 
   logOut(): void {
-    this.userService.logOut();
+    console.error("Logout not implemented");
     this.router.navigateByUrl('/');
   }
 }
