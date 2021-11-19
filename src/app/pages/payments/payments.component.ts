@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from './category';
+import { User } from 'src/app/services/account-users/user';
+import { Category } from 'src/app/services/categories/category';
 import { Payment } from './payment';
 import { PaymentsService } from './payments.service';
-import { User } from './user';
 
 const budgetId: number = 15
 const accountId: number = 2
@@ -20,7 +20,6 @@ export class PaymentsComponent implements OnInit {
   users: { [id: string]: string };
 
   constructor(private paymentService: PaymentsService) {
-    this.paymentsGrouped = groups;
   }
 
   isGroup(index, item): boolean {
@@ -38,7 +37,7 @@ export class PaymentsComponent implements OnInit {
         return categories;
       })
       .then(() => {
-        return this.paymentService.getUsers(accountId).toPromise()
+        return this.paymentService.getUsers(accountId).toPromise();
       })
       .then((data: User[]) => {
         let users: { [id: string]: string } = {};
@@ -79,17 +78,6 @@ export class PaymentsComponent implements OnInit {
 export interface PaymentGroup {
   date: Date
 }
-
-const groups: (PaymentDto | PaymentGroup)[] = [
-  { date: new Date('2021-01-01') },
-  { id: 1, amount: 2.23, category: "Food", description: 'Billa', owner: 'Omas' },
-  { id: 1, amount: 2.23, category: "Restaurants", description: 'DameJidlo', owner: 'Ica' },
-  { id: 1, amount: 2.23, category: "Food", description: 'Albert', owner: 'Omas' },
-  { date: new Date('2021-01-02') },
-  { id: 1, amount: 22.23, category: "Food", description: 'Albert', owner: 'Omas' },
-  { date: new Date('2021-01-03') },
-  { id: 1, amount: 12.23, category: "Restaurants", description: 'Avion', owner: 'Omas' },
-]
 
 export interface PaymentDto {
   id: number,

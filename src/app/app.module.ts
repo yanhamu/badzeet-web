@@ -9,17 +9,19 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { NewExpenseComponent } from './new-expense/new-expense.component';
 import { AuthHttpConfigModule } from './auth/auth-http-config.module';
 import { httpInterceptorProviders } from './http-interceptors';
-import { PaymentsComponent } from './payments/payments.component';
-import { PaymentsService } from './payments/payments.service';
+import { PaymentsComponent } from './pages/payments/payments.component';
+import { PaymentsService } from './pages/payments/payments.service';
+import { NewPaymentComponent } from './pages/new-payment/new-payment.component';
+import { CategoryService } from './services/categories/category.service';
+import { AccountUserService } from './services/account-users/account-user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    NewExpenseComponent,
+    NewPaymentComponent,
     PaymentsComponent,
   ],
   imports: [
@@ -34,7 +36,7 @@ import { PaymentsService } from './payments/payments.service';
     AuthHttpConfigModule,
   ],
   exports: [AppMaterialModule],
-  providers: [httpInterceptorProviders, PaymentsService],
+  providers: [httpInterceptorProviders, PaymentsService, CategoryService, AccountUserService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
