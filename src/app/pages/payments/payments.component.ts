@@ -16,8 +16,8 @@ const accountId: number = 2
 export class PaymentsComponent implements OnInit {
 
   paymentsGrouped: (PaymentDto | PaymentGroup)[];
-  categories: { [id: string]: string };
-  users: { [id: string]: string };
+  categories: { [id: string]: Category };
+  users: { [id: string]: User };
 
   constructor(private paymentService: PaymentsService) {
   }
@@ -26,33 +26,19 @@ export class PaymentsComponent implements OnInit {
     return item.date;
   }
 
-  ngOnInit(): void {
-    let categories: { [id: string]: string } = {};
-    this.paymentService.getCategories(accountId).toPromise()
-      .then((data: Category[]) => {
-        data.forEach(category => {
-          categories[category.id] = category.name;
-        });
-        this.categories = categories;
-        return categories;
+  async ngOnInit() {
+    await this.paymentService.getCategories(accountId)
+      .then((data) => {
+        this.categories = data;
+        return this.paymentService.getUsers(accountId);
       })
-      .then(() => {
-        return this.paymentService.getUsers(accountId).toPromise();
-      })
-      .then((data: User[]) => {
-        let users: { [id: string]: string } = {};
-        data.forEach(user => {
-          users[user.id] = user.nick;
-        });
-        this.users = users;
-        return users;
-      })
-      .then(() => {
-        this.loadPayments(accountId, budgetId, this.categories, this.users)
-      })
+      .then((data) => {
+        this.users = data;
+        return this.loadPayments(accountId, budgetId, this.categories, this.users);
+      });
   }
 
-  loadPayments(accountId: number, budgetId: number, categoryMap: any, userMap: any) {
+  loadPayments(accountId: number, budgetId: number, categoryMap:any, userMap: any) {
     this.paymentService.getPayments(accountId, budgetId).subscribe((data: Payment[]) => {
       let date: Date = null;
       let result: (PaymentDto | PaymentGroup)[] = [];
@@ -66,8 +52,8 @@ export class PaymentsComponent implements OnInit {
           id: payment.id,
           amount: payment.amount,
           description: payment.description,
-          owner: userMap[payment.userId],
-          category: categoryMap[payment.categoryId]
+          owner: userMap[payment.userId].nick,
+          category: categoryMap[payment.categoryId].name
         });
       });
       this.paymentsGrouped = result;

@@ -17,10 +17,10 @@ export class PaymentsService {
     }
 
     getCategories(accountId: number) {
-        return this.categoryService.getCategories(accountId);
+        return this.categoryService.getCategoryMap(accountId);
     }
 
     getUsers(accountId: number) {
-        return this.accountUserService.getUsers(accountId);
+        return this.accountUserService.getUserMap(accountId);
     }
 }

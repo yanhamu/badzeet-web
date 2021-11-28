@@ -1,24 +1,29 @@
 <div class="container">
-    <h1>New Expense</h1>
+    <h1>New Payment</h1>
     <mat-form-field>
-        <mat-label>Date</mat-label>
-        <input matInput type="date" />
+        <!-- <mat-label>Date</mat-label>
+        <input matInput type="date" [(ngModel)]="newPayment.date" /> -->
+
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="newPayment.date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
         <mat-label>Description</mat-label>
-        <input matInput type="text" />
+        <input matInput type="text" [(ngModel)]="newPayment.description" />
     </mat-form-field>
 
     <mat-form-field>
         <mat-label>Amount</mat-label>
-        <input matInput type="number" step="1" />
+        <input matInput type="number" step="1" [(ngModel)]="newPayment.amount" />
     </mat-form-field>
 
     <mat-form-field>
         <mat-label>Category</mat-label>
-        <mat-select>
-            <mat-option *ngFor="let category of categories">{{category.name}}</mat-option>
+        <mat-select [(ngModel)]="newPayment.categoryId">
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
         </mat-select>
     </mat-form-field>
 
@@ -29,10 +34,12 @@
         </mat-select>
     </mat-form-field>
 
+    userId:{{userId}}
+
     <mat-button-toggle-group>
         <mat-button-toggle value="normal">Normal</mat-button-toggle>
         <mat-button-toggle value="pending">Pending</mat-button-toggle>
     </mat-button-toggle-group>
 
-    <button mat-raised-button color="primary">Save</button>
+    <button mat-raised-button color="primary" (click)="onSave()">Save</button>
 </div>

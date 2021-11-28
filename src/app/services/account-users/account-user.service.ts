@@ -19,9 +19,9 @@ export class AccountUserService {
 
     async getUserMap(accountId: number) {
         const users = await this.getUsers(accountId).toPromise();
-        let result: { [id: string]: string; } = {};
+        let result: { [id: string]: User; } = {};
         users.forEach(user=>{
-            result[user.id] = user.nick;
+            result[user.id] = user;
         });
         return result;
     }
