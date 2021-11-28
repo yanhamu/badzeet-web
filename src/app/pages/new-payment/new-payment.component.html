@@ -29,17 +29,17 @@
 
     <mat-form-field>
         <mat-label>Owner</mat-label>
-        <mat-select>
-            <mat-option *ngFor="let user of users;">{{user.nick}}</mat-option>
+        <mat-select [(ngModel)]="newPayment.userId">
+            <mat-option *ngFor="let user of users" [value]="user.id">{{user.nick}}</mat-option>
         </mat-select>
     </mat-form-field>
 
-    userId:{{userId}}
-
-    <mat-button-toggle-group>
-        <mat-button-toggle value="normal">Normal</mat-button-toggle>
-        <mat-button-toggle value="pending">Pending</mat-button-toggle>
-    </mat-button-toggle-group>
+    <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select [(ngModel)]="newPayment.type">
+            <mat-option *ngFor="let t of paymentTypes" [value]="t.id">{{t.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 
     <button mat-raised-button color="primary" (click)="onSave()">Save</button>
 </div>

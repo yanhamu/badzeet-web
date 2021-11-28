@@ -16,6 +16,8 @@ import { PaymentsService } from './pages/payments/payments.service';
 import { NewPaymentComponent } from './pages/new-payment/new-payment.component';
 import { CategoryService } from './services/categories/category.service';
 import { AccountUserService } from './services/account-users/account-user.service';
+import { AuthGuard } from './auth/auth-guard';
+import { NewPaymentservice } from './pages/new-payment/new-payment.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,12 @@ import { AccountUserService } from './services/account-users/account-user.servic
     AuthHttpConfigModule,
   ],
   exports: [AppMaterialModule],
-  providers: [httpInterceptorProviders, PaymentsService, CategoryService, AccountUserService],
+  providers: [httpInterceptorProviders, 
+    PaymentsService, 
+    CategoryService, 
+    AccountUserService, 
+    NewPaymentservice,
+    AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
