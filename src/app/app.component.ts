@@ -15,11 +15,19 @@ export class AppComponent {
   isAuthenticated = false;
 
   ngOnInit() {
-    this.oidcSecurityService.checkAuth().subscribe((isAuthenticated) => {
+    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated, userData, accessToken }) => {
       console.log(isAuthenticated);
-      this.isAuthenticated = isAuthenticated;
+      if(isAuthenticated){
+        this.isAuthenticated = isAuthenticated;
+      }else{
+        this.login();
+      }
 
     });
+  }
+
+  login() {
+    this.oidcSecurityService.authorize();
   }
 
   logOut(): void {
