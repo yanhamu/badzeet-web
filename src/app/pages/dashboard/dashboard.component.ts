@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,13 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor() { }
+
+  budgetId: number = 999; // TODO remove 
 
   ngOnInit(): void {
-    this.loadUp();
-  }
-
-  async loadUp(): Promise<void> {
-    await this.httpClient.get('https://localhost:44373/api/auth').toPromise().then(res => console.log(res));
   }
 }

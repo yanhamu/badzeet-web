@@ -18,6 +18,9 @@ import { CategoryService } from './services/categories/category.service';
 import { AccountUserService } from './services/account-users/account-user.service';
 import { AuthGuard } from './auth/auth-guard';
 import { NewPaymentservice } from './pages/new-payment/new-payment.service';
+import { AccountsService } from './services/accounts/accounts.service';
+import { StorageService } from './services/storage/storage.service';
+import { NavigationComponent } from './components/navigation.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { NewPaymentservice } from './pages/new-payment/new-payment.service';
     DashboardComponent,
     NewPaymentComponent,
     PaymentsComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +47,8 @@ import { NewPaymentservice } from './pages/new-payment/new-payment.service';
     CategoryService, 
     AccountUserService, 
     NewPaymentservice,
+    AccountsService,
+    StorageService,
     AuthGuard],
   bootstrap: [AppComponent],
 })

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/services/account-users/user';
 import { Category } from 'src/app/services/categories/category';
+import { StorageService } from 'src/app/services/storage/storage.service';
 import { Payment } from './payment';
 import { PaymentsService } from './payments.service';
 
 const budgetId: number = 15
-const accountId: number = 2
 
 @Component({
   selector: 'app-payments',
@@ -19,7 +19,8 @@ export class PaymentsComponent implements OnInit {
   categories: { [id: string]: Category };
   users: { [id: string]: User };
 
-  constructor(private paymentService: PaymentsService) {
+  constructor(private paymentService: PaymentsService,
+    private storageService: StorageService) {
   }
 
   isGroup(index, item): boolean {
@@ -27,6 +28,8 @@ export class PaymentsComponent implements OnInit {
   }
 
   async ngOnInit() {
+    let accountId = this.storageService.getAccount().id;
+
     await this.paymentService.getCategories(accountId)
       .then((data) => {
         this.categories = data;
@@ -38,7 +41,7 @@ export class PaymentsComponent implements OnInit {
       });
   }
 
-  loadPayments(accountId: number, budgetId: number, categoryMap:any, userMap: any) {
+  loadPayments(accountId: number, budgetId: number, categoryMap: any, userMap: any) {
     this.paymentService.getPayments(accountId, budgetId).subscribe((data: Payment[]) => {
       let date: Date = null;
       let result: (PaymentDto | PaymentGroup)[] = [];
