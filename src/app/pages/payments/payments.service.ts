@@ -12,8 +12,16 @@ const baseUrl = `${environment.baseUrl}/api/`;
 export class PaymentsService {
     constructor(private httpClient: HttpClient, private categoryService: CategoryService, private accountUserService: AccountUserService) { }
 
-    getPayments(accountId: number, budgetId: number) {
-        return this.httpClient.get<Payment[]>(baseUrl + `accounts/${accountId}/budgets/${budgetId}/payments`);
+    getPayments(accountId: number, budgetId: number, from: string, to: string) {
+        if (budgetId == null) {
+            return this.httpClient.get<Payment[]>(baseUrl + `accounts/${accountId}/payments?from=${from}&to=${to}`);
+        } else {
+            return this.httpClient.get<Payment[]>(baseUrl + `accounts/${accountId}/budgets/${budgetId}/payments`);
+        }
+    }
+
+    getPayment(accountId: number, paymentId: number) {
+        return this.httpClient.get<Payment>(baseUrl + `accounts/${accountId}/payments/${paymentId}`);
     }
 
     getCategories(accountId: number) {
@@ -22,5 +30,10 @@ export class PaymentsService {
 
     getUsers(accountId: number) {
         return this.accountUserService.getUserMap(accountId);
+
+    }
+
+    update(accountId: number, paymentId: number, payment: Payment) {
+        return this.httpClient.put<Payment>(baseUrl + `accounts/${accountId}/payments/${paymentId}`, payment);
     }
 }

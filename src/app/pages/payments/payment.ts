@@ -5,5 +5,6 @@ export interface Payment {
     description: string,
     amount: number,
     categoryId: number,
-    userId: string
+    userId: string,
+    type: number
 }

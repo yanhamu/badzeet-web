@@ -26,10 +26,15 @@
     </ng-container>
 
     <ng-container matColumnDef="group">
-        <th mat-header-cell *matCellDef="let group" [attr.colspan]="5">{{group.date | date}}</th>
+        <th mat-header-cell *matCellDef="let group" [attr.colspan]="6">{{group.date | date}}</th>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="['space', 'description', 'amount', 'category', 'owner']"></tr>
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"> <a mat-button [routerLink]="['/payments',element.id]">edit</a> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['space', 'description', 'amount', 'category', 'owner', 'action']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['group']; when isGroup"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['space', 'description', 'amount', 'category', 'owner'];"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['space', 'description', 'amount', 'category', 'owner', 'action'];"></tr>
 </table>

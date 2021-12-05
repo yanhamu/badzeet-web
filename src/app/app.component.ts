@@ -24,38 +24,49 @@ export class AppComponent {
   isAuthenticated = false;
   accountId: number;
   budgetId: number;
-  from: Date;
-  to: Date;
+  from: string;
+  to: string;
 
   ngOnInit() {
-    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated, userData, accessToken }) => {
-      if (isAuthenticated) {
-        this.isAuthenticated = isAuthenticated;
-      } else {
-        this.login();
-      }
+    this.oidcSecurityService.checkAuth().toPromise()
+      .then(({ isAuthenticated, userData, accessToken }) => {
+        if (isAuthenticated) {
+          this.isAuthenticated = isAuthenticated;
+        } else {
+          this.login();
+        }
 
-      this.accountService.getAccount()
-        .then(a => {
-          this.accountId = a.id;
-          console.log('getting current params');
-          this.route.queryParams.subscribe(params => {
-            if (params['budgetId'] == null || params['from'] == null) {
-              this.navigationService.getNavigation(this.accountId)
-                .then(result => {
-                  this.router.navigate([], {
-                    relativeTo: this.route,
-                    queryParams: {
-                      budgetId: result.budgetId,
-                      from: this.datePipe.transform(result.from, 'yyyy-MM-dd'),
-                      to: this.datePipe.transform(result.to, 'yyyy-MM-dd')
-                    }
-                  })
-                });
-            }
+        this.accountService.getAccount()
+          .then(a => {
+            this.accountId = a.id;
+            this.route.queryParams.subscribe(params => {
+
+              let nullOrEmpty = (x: string) => x == null || x == '';
+
+              this.budgetId = params['budgetId'];
+              this.from = params['from'];
+              this.to = params['to'];
+
+              if (nullOrEmpty(params['budgetId']) && nullOrEmpty(params['from'])) {
+                console.log('this needs setting');
+                this.navigationService.getNavigation(this.accountId)
+                  .then(result => {
+                    this.from = this.datePipe.transform(result.from, 'yyyy-MM-dd');
+                    this.to = this.datePipe.transform(result.to, 'yyyy-MM-dd');
+
+                    this.router.navigate([], {
+                      relativeTo: this.route,
+                      queryParams: {
+                        budgetId: result.budgetId,
+                        from: this.from,
+                        to: this.to
+                      }
+                    });
+                  });
+              }
+            })
           })
-        })
-    });
+      });
   }
 
   login() {

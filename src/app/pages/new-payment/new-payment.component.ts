@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AccountUserService } from 'src/app/services/account-users/account-user.service';
 import { User } from 'src/app/services/account-users/user';
-import { AccountsService } from 'src/app/services/accounts/accounts.service';
 import { Category } from 'src/app/services/categories/category';
 import { CategoryService } from 'src/app/services/categories/category.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
@@ -40,7 +39,7 @@ export class NewPaymentComponent implements OnInit {
     private storageService: StorageService) { }
 
   async ngOnInit() {
-    this.accountId =this.storageService.getAccount().id
+    this.accountId = this.storageService.getAccount().id
     this.categories = await this.categoryService.listCategories(this.accountId);
     this.users = await this.accountUserService.listUsers(this.accountId);
     this.newPayment.date = new Date();
@@ -49,7 +48,6 @@ export class NewPaymentComponent implements OnInit {
   }
 
   onSave() {
-    console.log("saving");
     this.newPaymentService.createPayment(this.accountId, this.newPayment)
       .toPromise()
       .then(r => {

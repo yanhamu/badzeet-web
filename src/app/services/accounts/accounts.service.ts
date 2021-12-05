@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { StorageService } from "../storage/storage.service";
 import { Account } from "./account";
+import { first, single } from "rxjs/operators";
 
 const baseUrl = `${environment.baseUrl}/api/`;
 
@@ -12,7 +13,7 @@ export class AccountsService {
 
     async getAccount() {
         var account = this.storage.getAccount();
-        if (account != null){
+        if (account != null) {
             return account;
         }
 
