@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/services/account-users/user';
+import { BudgetService } from 'src/app/services/budget/budget.service';
 import { Category } from 'src/app/services/categories/category';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { Payment, PaymentType } from './payment';
@@ -17,11 +18,12 @@ export class PaymentsComponent implements OnInit {
   categories: { [id: string]: Category };
   users: { [id: string]: User };
   budgetId: number;
-  from: string;
-  to: string;
+  from: Date;
+  to: Date;
 
   constructor(private paymentService: PaymentsService,
     private storageService: StorageService,
+    private budgetService:BudgetService,
     private route: ActivatedRoute) {
   }
 
@@ -29,13 +31,14 @@ export class PaymentsComponent implements OnInit {
     return item.date;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     let accountId = this.storageService.getAccount().id;
     let params = this.route.snapshot.queryParams;
 
     this.budgetId = params['budgetId'] == '' ? null : params['budgetId'];
-    this.from = params['from'];
-    this.to = params['to'];
+    let intervals = await this.budgetService.getBudgetInterval(this.budgetId);
+    this.from = intervals.from;
+    this.to = intervals.to;
 
     this.paymentService.getCategories(accountId)
       .then((data) => {
@@ -49,8 +52,8 @@ export class PaymentsComponent implements OnInit {
 
   }
 
-  loadPayments(accountId: number, budgetId: number, from: string, to: string, categoryMap: any, userMap: any) {
-    this.paymentService.getPayments(accountId, budgetId, from, to, PaymentType.Normal)
+  loadPayments(accountId: number, budgetId: number, from: Date, to: Date, categoryMap: any, userMap: any) {
+    this.paymentService.getPayments(accountId, from, to, PaymentType.Normal)
       .subscribe((data: Payment[]) => {
         let date: Date = null;
         let result: (PaymentDto | PaymentGroup)[] = [];

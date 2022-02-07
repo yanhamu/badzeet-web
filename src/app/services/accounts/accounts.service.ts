@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { StorageService } from "../storage/storage.service";
 import { Account } from "./account";
-import { first, single } from "rxjs/operators";
 
 const baseUrl = `${environment.baseUrl}/api/`;
 

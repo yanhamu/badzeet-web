@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const modules = [
   MatFormFieldModule,
