@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/services/account-users/user';
 import { Category } from 'src/app/services/categories/category';
 import { StorageService } from 'src/app/services/storage/storage.service';
-import { Payment } from './payment';
+import { Payment, PaymentType } from './payment';
 import { PaymentsService } from './payments.service';
 
 @Component({
@@ -50,7 +50,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   loadPayments(accountId: number, budgetId: number, from: string, to: string, categoryMap: any, userMap: any) {
-    this.paymentService.getPayments(accountId, budgetId, from, to)
+    this.paymentService.getPayments(accountId, budgetId, from, to, PaymentType.Normal)
       .subscribe((data: Payment[]) => {
         let date: Date = null;
         let result: (PaymentDto | PaymentGroup)[] = [];

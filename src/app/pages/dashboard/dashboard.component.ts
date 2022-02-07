@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
-  budgetId: number = 999; // TODO remove 
+  previousBudgetId: number
+  budgetId: number;
+  followingBudgetId: number
 
   ngOnInit(): void {
+    let params = this.route.snapshot.queryParams
+    this.budgetId = params['budgetId'];
   }
 }

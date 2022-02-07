@@ -1,7 +1,7 @@
 <mat-toolbar *ngIf="isAuthenticated">
     <div class="container">
         <a mat-button href="/">Badzeet</a>
-        <a mat-button href="/payments?budgetId={{budgetId}}&from={{from}}&to={{to}}">List</a>
+        <a mat-button href="/payments?budgetId={{budgetId}}">List</a>
         <a mat-button color="primary" href="/new-payment">New</a>
         <button mat-button class="right" color="primary" (click)="logOut()">
       Logout
@@ -17,7 +17,6 @@
     <app-login></app-login>
 </div>
 
-<p>budgetId:{{budgetId}}</p>
-<p>from:{{from}}</p>
-<p>to:{{to}}</p>
-<router-outlet></router-outlet>
+<div *ngIf="isAuthenticated">
+    <router-outlet></router-outlet>
+</div>

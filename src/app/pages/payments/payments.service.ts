@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Payment } from "./payment";
+import { Payment, PaymentType } from "./payment";
 import { Injectable } from '@angular/core';
 
 import { environment } from "src/environments/environment";
@@ -12,9 +12,9 @@ const baseUrl = `${environment.baseUrl}/api/`;
 export class PaymentsService {
     constructor(private httpClient: HttpClient, private categoryService: CategoryService, private accountUserService: AccountUserService) { }
 
-    getPayments(accountId: number, budgetId: number, from: string, to: string) {
+    getPayments(accountId: number, budgetId: number, from: string, to: string, type: PaymentType) {
         if (budgetId == null) {
-            return this.httpClient.get<Payment[]>(baseUrl + `accounts/${accountId}/payments?from=${from}&to=${to}`);
+            return this.httpClient.get<Payment[]>(baseUrl + `accounts/${accountId}/payments?from=${from}&to=${to}&type=${type}`);
         } else {
             return this.httpClient.get<Payment[]>(baseUrl + `accounts/${accountId}/budgets/${budgetId}/payments`);
         }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { AccountUserService } from "src/app/services/account-users/account-user.service";
 import { User } from "src/app/services/account-users/user";
@@ -32,6 +32,7 @@ export class EditPaymentComponent implements OnInit {
     constructor(
         private paymentService: PaymentsService,
         private route: ActivatedRoute,
+        private router: Router,
         private storageService: StorageService,
         private categoryService: CategoryService,
         private accountUserService: AccountUserService) {
@@ -51,8 +52,11 @@ export class EditPaymentComponent implements OnInit {
     categories: Category[];
     users: User[];
 
-    async onSave() {
-        console.log(this.payment);
-        await this.paymentService.update(this.accountId, this.id, this.payment).toPromise();
+    onSave() {
+        this.paymentService.update(this.accountId, this.id, this.payment
+            ).toPromise()
+            .then(r=>{
+                this.router.navigate(['/payments']);
+            });
     }
 }

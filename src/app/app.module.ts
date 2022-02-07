@@ -23,7 +23,6 @@ import { AuthGuard } from './auth/auth-guard';
 import { NewPaymentservice } from './pages/new-payment/new-payment.service';
 import { AccountsService } from './services/accounts/accounts.service';
 import { StorageService } from './services/storage/storage.service';
-import { NavigationService } from './services/navigations/navigation.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +52,6 @@ import { NavigationService } from './services/navigations/navigation.service';
     NewPaymentservice,
     AccountsService,
     StorageService,
-    NavigationService,
     AuthGuard],
   bootstrap: [AppComponent],
 })
