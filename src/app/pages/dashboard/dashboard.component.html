@@ -1,2 +1,5 @@
-<app-navigation [budgetId]="budgetId"></app-navigation>
+<div *ngIf="budgetId">
+    <app-navigation [budgetId]="budgetId"></app-navigation>
+    <summary [budgetId]="budgetId"></summary>
+</div>
 <p>dashboard works!</p>

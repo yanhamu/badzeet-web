@@ -1,0 +1,31 @@
+<div *ngIf="summary">
+    <mat-card>
+        <mat-card-title>Summary</mat-card-title>
+        <table>
+            <tr>
+                <th>Budget</th>
+                <td>{{summary.budget}}</td>
+            </tr>
+            <tr>
+                <th>Spend</th>
+                <td>{{summary.spend}}</td>
+            </tr>
+            <tr>
+                <th>Remaining</th>
+                <td>{{summary.remainingBudget}}</td>
+            </tr>
+            <tr>
+                <th>Remaining Daily Avg</th>
+                <td>{{summary.remainingDailyBudget}}</td>
+            </tr>
+            <tr>
+                <th>Pending Payments</th>
+                <td>{{summary.pendingPayments}}</td>
+            </tr>
+            <tr>
+                <th>Days Left</th>
+                <td>{{summary.remainingDays}}</td>
+            </tr>
+        </table>
+    </mat-card>
+</div>

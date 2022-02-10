@@ -8,16 +8,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(
-    private route: ActivatedRoute
-  ) { }
+  constructor(private route: ActivatedRoute) { }
 
-  previousBudgetId: number
   budgetId: number;
-  followingBudgetId: number
 
   ngOnInit(): void {
-    let params = this.route.snapshot.queryParams
-    this.budgetId = params['budgetId'];
+    this.route.queryParamMap.subscribe(value => {
+      if (value.has("budgetId")) {
+        this.budgetId = Number(value.get("budgetId"));
+      }
+    });
   }
 }

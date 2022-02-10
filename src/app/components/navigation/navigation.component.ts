@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-navigation',
     templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.css'],
-    inputs: ['budgetId']
+    inputs:['budgetId']
 })
 export class NavigationComponent implements OnInit {
 
-    constructor(private route: ActivatedRoute) { }
+    constructor() { }
 
     ngOnInit(): void {
         let year = Number(this.budgetId.toString().substring(0, 4));

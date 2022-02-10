@@ -15,6 +15,7 @@ export class AppComponent {
     private oidcSecurityService: OidcSecurityService,
     private accountService: AccountsService,
     private route: ActivatedRoute) { }
+    
   title = 'badzeet-web';
   isAuthenticated = false;
   accountId: number;

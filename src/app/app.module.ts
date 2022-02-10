@@ -24,6 +24,8 @@ import { NewPaymentservice } from './pages/new-payment/new-payment.service';
 import { AccountsService } from './services/accounts/accounts.service';
 import { StorageService } from './services/storage/storage.service';
 import { BudgetService } from './services/budget/budget.service';
+import { SummaryComponent } from './components/summary/summary.component';
+import { SummaryService } from './components/summary/summary.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { BudgetService } from './services/budget/budget.service';
     NewPaymentComponent,
     EditPaymentComponent,
     PaymentsComponent,
-    NavigationComponent
+    NavigationComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { BudgetService } from './services/budget/budget.service';
     AccountsService,
     StorageService,
     BudgetService,
+    SummaryService,
     AuthGuard],
   bootstrap: [AppComponent],
 })

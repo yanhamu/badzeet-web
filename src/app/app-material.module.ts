@@ -9,6 +9,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card'
 
 const modules = [
   MatFormFieldModule,
@@ -21,6 +22,7 @@ const modules = [
   MatTableModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatCardModule 
 ];
 
 @NgModule({
