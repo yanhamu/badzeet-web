@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BudgetService } from 'src/app/services/budget/budget.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,15 +9,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private budgetService: BudgetService) { }
 
   budgetId: number;
+  hasBudget: boolean = false;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.queryParamMap.subscribe(value => {
-      if (value.has("budgetId")) {
-        this.budgetId = Number(value.get("budgetId"));
-      }
+      this.init(value);
     });
+  }
+
+  async init(value) {
+    this.budgetId = Number(value.get("budgetId"));
+    let budget = await this.budgetService.getBudget(this.budgetId);
+    this.hasBudget = budget != null;
   }
 }

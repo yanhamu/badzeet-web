@@ -1,12 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { AccountsService } from '../accounts/accounts.service';
+import { BudgetDto } from './budgetDto';
+
+const baseUrl = `${environment.baseUrl}/api/`;
 
 @Injectable()
 export class BudgetService {
     constructor(
         private route: ActivatedRoute,
-        private accountService: AccountsService) { }
+        private accountService: AccountsService,
+        private httpClient: HttpClient) { }
 
     async getCurrentDates(): Promise<Interval> {
         let params = this.route.snapshot.queryParams;
@@ -14,6 +20,19 @@ export class BudgetService {
 
         let account = await this.accountService.getAccount();
         return this.getInterval(budgetId, account.firstDayOfTheBudget);
+    }
+
+    async getBudget(budgetId: number): Promise<BudgetDto> {
+        let account = await this.accountService.getAccount();
+        return this.httpClient.get<BudgetDto>(baseUrl + `accounts/${account.id}/budgets/${budgetId}`).toPromise()
+            .catch(e => {
+                if (e.status == 404)
+                    return null;
+                else {
+                    console.error(e);
+                    return null;
+                };
+            })
     }
 
     getInterval(budgetId: number, firstDay: number): Interval {

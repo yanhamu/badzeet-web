@@ -1,5 +1,8 @@
 <div *ngIf="budgetId">
     <app-navigation [budgetId]="budgetId"></app-navigation>
-    <summary [budgetId]="budgetId"></summary>
+    <summary *ngIf="hasBudget" [budgetId]="budgetId"></summary>
+
+    <div *ngIf="!hasBudget">
+        <button mat-raised-button color="primary">Create Budget</button>
+    </div>
 </div>
-<p>dashboard works!</p>
