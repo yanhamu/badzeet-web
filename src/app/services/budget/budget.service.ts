@@ -59,6 +59,20 @@ export class BudgetService {
 
         return { from: start, to: end };
     }
+
+    getPreviousBudget(budgetId: number): number {
+        let year = Number(budgetId.toString().substring(0, 4));
+        let month = Number(budgetId.toString().substring(4, 6));
+
+        let date = new Date(year, month, 1);
+        date.setMonth(date.getMonth() - 1);
+
+        let y = date.getUTCFullYear();
+        let m = date.getUTCMonth() + 1;
+
+        let previousBudgetId = `${y.toString()}${m.toString().padStart(2, "2")}`;
+        return Number(previousBudgetId);
+    }
 }
 
 export interface Interval {
