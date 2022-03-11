@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Category } from "./category";
 import { environment } from "src/environments/environment";
+import { Observable } from "rxjs";
 
 const baseUrl = `${environment.baseUrl}/api/`;
 
@@ -9,11 +10,11 @@ const baseUrl = `${environment.baseUrl}/api/`;
 export class CategoryService {
     constructor(private httpClient: HttpClient) { }
 
-    getCategories(accountId: number) {
+    getCategories(accountId: number): Observable<Category[]> {
         return this.httpClient.get<Category[]>(baseUrl + `accounts/${accountId}/categories`);
     }
 
-    listCategories(accountId:number){
+    listCategories(accountId: number) {
         return this.getCategories(accountId).toPromise();
     }
 

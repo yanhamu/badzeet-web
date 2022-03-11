@@ -10,6 +10,7 @@ import { PaymentsComponent } from './pages/payments/payments.component';
 import { NewPaymentComponent } from './pages/new-payment/new-payment.component';
 import { EditPaymentComponent } from './pages/edit-payment/edit-payment.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { BudgetBuilderComponent } from './components/budget-builder/budget-builder.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
@@ -35,7 +36,8 @@ import { SummaryService } from './components/summary/summary.service';
     EditPaymentComponent,
     PaymentsComponent,
     NavigationComponent,
-    SummaryComponent
+    SummaryComponent,
+    BudgetBuilderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { forkJoin, Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AccountsService } from '../accounts/accounts.service';
 import { BudgetDto } from './budgetDto';
@@ -33,6 +35,14 @@ export class BudgetService {
                     return null;
                 };
             })
+    }
+
+    getBudgetObservable(budgetId: number): Observable<BudgetDto> {
+        let x = this.accountService.getAccountObservable()
+            .pipe(switchMap(account => {
+                return this.httpClient.get<BudgetDto>(baseUrl + `accounts/${account.id}/budgets/${budgetId}`);
+            }));
+        return x;
     }
 
     getInterval(budgetId: number, firstDay: number): Interval {
@@ -70,7 +80,7 @@ export class BudgetService {
         let y = date.getUTCFullYear();
         let m = date.getUTCMonth() + 1;
 
-        let previousBudgetId = `${y.toString()}${m.toString().padStart(2, "2")}`;
+        let previousBudgetId = `${y.toString()}${m.toString().padStart(2, "0")}`;
         return Number(previousBudgetId);
     }
 }

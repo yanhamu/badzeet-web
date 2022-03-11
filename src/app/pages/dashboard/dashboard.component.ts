@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BudgetService } from 'src/app/services/budget/budget.service';
 
 @Component({
@@ -9,7 +9,10 @@ import { BudgetService } from 'src/app/services/budget/budget.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private budgetService: BudgetService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private budgetService: BudgetService) { }
 
   budgetId: number;
   hasBudget: boolean = false;
@@ -24,5 +27,9 @@ export class DashboardComponent implements OnInit {
     this.budgetId = Number(value.get("budgetId"));
     let budget = await this.budgetService.getBudget(this.budgetId);
     this.hasBudget = budget != null;
+  }
+
+  newBudget() {
+    this.router.navigate(['/new-budget', { budgetId: this.budgetId }]);
   }
 }
