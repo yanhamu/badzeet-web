@@ -1,3 +1,45 @@
 <h1>Budget Builder</h1>
 
 previous: {{previousBudgetId}} current: {{currentBudgetId}}
+
+<div class="container">
+    <mat-card>
+        <table mat-table [dataSource]="categoryBudgets">
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Category </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="budget">
+                <th mat-header-cell *matHeaderCellDef> Budget </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-form-field appearance="standard">
+                        <input matInput type="number" [(ngModel)]="element.amount" (ngModelChange)="checkSum()" />
+                    </mat-form-field>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['name','budget']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['name','budget'];"></tr>
+        </table>
+
+    </mat-card>
+
+    <mat-card class="container-column">
+        <mat-form-field appearance="standard">
+            <mat-label>Budget</mat-label>
+            <input matInput type="number" [(ngModel)]="availableBudget" (ngModelChange)="checkSum()" />
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+            <mat-label>Difference</mat-label>
+            <input readonly matInput type="number" [(ngModel)]="diffBudget" />
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+            <mat-label>Check sum</mat-label>
+            <input readonly matInput type="number" [(ngModel)]="budgetSum" />
+        </mat-form-field>
+    </mat-card>
+</div>

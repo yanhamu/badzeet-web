@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { AccountsService } from 'src/app/services/accounts/accounts.service';
 import { BudgetService } from 'src/app/services/budget/budget.service';
 import { BudgetDto } from 'src/app/services/budget/budgetDto';
-import { Category } from 'src/app/services/categories/category';
 import { CategoryService } from 'src/app/services/categories/category.service';
 
 @Component({
@@ -17,7 +16,10 @@ export class BudgetBuilderComponent implements OnInit {
     previousBudget: BudgetDto;
     currentBudgetId: number;
     previousBudgetId: number;
-    categories: Category[];
+    categoryBudgets: CategoryBudgetDto[];
+    budgetSum: number;
+    availableBudget:number;
+    diffBudget:number;
 
     constructor(
         private route: ActivatedRoute,
@@ -38,22 +40,36 @@ export class BudgetBuilderComponent implements OnInit {
     }
 
     private initialize() {
-
         this.accountService.getAccountObservable().subscribe(a => {
-            this.categoryService.getCategories(a.id).subscribe(c => this.categories = c);
-            this.budgetService.getBudgetObservable(this.previousBudgetId)
-                .subscribe(budget => {
-                    this.previousBudget = budget;
-                }, error => {
-                    console.error('some error occured')
-                    console.error(error);
-                });
-                // TODO if previous budget exists populate new budget with previous values
-                // add overall budget input field
-                // add budget diff field 
-
-                // if previous budget dont exists the let it be as is.
+            this.categoryService.getCategories(a.id).subscribe(categories => {
+                this.categoryBudgets = categories.map<CategoryBudgetDto>(c => { return { name: c.name, id: c.id, amount: 0 } });
+                this.budgetService.getBudgetObservable(this.previousBudgetId)
+                    .subscribe(budget => {
+                        this.previousBudget = budget;
+                        this.checkSum();
+                    }, error => {
+                        if (error.status == 404) {
+                        } else {
+                            console.log(error);
+                        }
+                        this.checkSum();
+                    });
+            });
         });
-
     }
+
+    checkSum() {
+        let s = 0;
+        this.categoryBudgets.forEach(element => {
+            s += element.amount;
+        });
+        this.budgetSum = s;
+        this.diffBudget = this.availableBudget - this.budgetSum;
+    }
+}
+
+export class CategoryBudgetDto {
+    id: number;
+    name: string;
+    amount: number
 }
