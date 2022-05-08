@@ -1,5 +1,5 @@
 <div *ngIf="budgetId">
-    <app-navigation [budgetId]="budgetId"></app-navigation>
+    <app-navigation [budgetId]="budgetId" (setBudgetId)="setBudgetId($event)"></app-navigation>
     <summary *ngIf="hasBudget" [budgetId]="budgetId"></summary>
 
     <div *ngIf="!hasBudget">

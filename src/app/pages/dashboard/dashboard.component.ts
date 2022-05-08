@@ -32,4 +32,10 @@ export class DashboardComponent implements OnInit {
   newBudget() {
     this.router.navigate(['/new-budget', { budgetId: this.budgetId }]);
   }
+
+  setBudgetId(budgetId: number) {
+    console.log("budget id was changed");
+    this.budgetId = budgetId;
+    this.router.navigate([], { relativeTo: this.route, queryParams: { budgetId: budgetId } });
+  }
 }
