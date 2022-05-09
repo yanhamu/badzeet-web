@@ -12,6 +12,10 @@ const baseUrl = `${environment.baseUrl}/api/`;
 export class PaymentsService {
     constructor(private httpClient: HttpClient, private categoryService: CategoryService, private accountUserService: AccountUserService) { }
 
+    getAllPayments(accountId: number, type: PaymentType) {
+        return this.httpClient.get<Payment[]>(baseUrl + `accounts/${accountId}/payments?type=${type}`);
+    }
+
     getPayments(accountId: number, from: Date, to: Date, type: PaymentType) {
         return this.httpClient.get<Payment[]>(baseUrl + `accounts/${accountId}/payments?from=${from.toISOString()}&to=${to.toISOString()}&type=${type}`);
     }

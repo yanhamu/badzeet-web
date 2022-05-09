@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BudgetService } from 'src/app/services/budget/budget.service';
 
@@ -28,6 +28,10 @@ export class DashboardComponent implements OnInit {
     let budget = await this.budgetService.getBudget(this.budgetId);
     this.hasBudget = budget != null;
   }
+
+  ngOnChanges(changes:SimpleChanges){
+    this.ngOnInit();
+}
 
   newBudget() {
     this.router.navigate(['/new-budget', { budgetId: this.budgetId }]);

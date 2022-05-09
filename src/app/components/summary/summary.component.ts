@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { AccountsService } from 'src/app/services/accounts/accounts.service';
 import { SummaryDto, SummaryService } from './summary.service';
 
@@ -19,5 +19,9 @@ export class SummaryComponent implements OnInit {
         let account = await this.accountService.getAccount();
 
         this.summary = await this.service.get(this.budgetId, account.id).toPromise();
+    }
+
+    async ngOnChanges(changes:SimpleChanges){
+        await this.ngOnInit();
     }
 }

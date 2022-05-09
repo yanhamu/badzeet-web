@@ -1,8 +1,15 @@
-<div *ngIf="budgetId">
-    <app-navigation [budgetId]="budgetId" (setBudgetId)="setBudgetId($event)"></app-navigation>
-    <summary *ngIf="hasBudget" [budgetId]="budgetId"></summary>
+<div class="container">
 
+    <div *ngIf="budgetId">
+        <app-navigation [budgetId]="budgetId" (setBudgetId)="setBudgetId($event)"></app-navigation>
+        <summary *ngIf="hasBudget" [budgetId]="budgetId"></summary>
+        <br />
+        <pending-payments [budgetId]="budgetId"></pending-payments>
+    </div>
+</div>
+
+<div class="container">
     <div *ngIf="!hasBudget">
-        <button mat-raised-button color="primary" (click)="newBudget()">Create Budget</button>
+        <button mat-raised-button color="primary" (click)="newBudget()">Create Budget {{budgetId}}</button>
     </div>
 </div>

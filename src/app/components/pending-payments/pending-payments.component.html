@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-title>Pending payments</mat-card-title>
+    <table>
+        <tr *ngFor="let payment of payments">
+            <th>{{payment.description}}</th>
+            <td>{{payment.amount}}</td>
+            <td>{{payment.category}}</td>
+            <td>{{payment.owner}}</td>
+        </tr>
+
+    </table>
+</mat-card>
