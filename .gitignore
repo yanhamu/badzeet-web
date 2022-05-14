@@ -45,3 +45,13 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# SPA
+**/bin
+**/obj
+**/wwwroot
+.vs
+
+**/PublishProfiles
+profile.arm.json
+appsettings.Production.json
