@@ -28,6 +28,7 @@ import { StorageService } from './services/storage/storage.service';
 import { BudgetService } from './services/budget/budget.service';
 import { SummaryComponent } from './components/summary/summary.component';
 import { SummaryService } from './components/summary/summary.service';
+import { IndexComponent } from './pages/index/index.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SummaryService } from './components/summary/summary.service';
     NavigationComponent,
     SummaryComponent,
     BudgetBuilderComponent,
-    PendingPaymentsComponent
+    PendingPaymentsComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
@@ -53,10 +55,10 @@ import { SummaryService } from './components/summary/summary.service';
     AuthHttpConfigModule,
   ],
   exports: [AppMaterialModule],
-  providers: [httpInterceptorProviders, 
-    PaymentsService, 
-    CategoryService, 
-    AccountUserService, 
+  providers: [httpInterceptorProviders,
+    PaymentsService,
+    CategoryService,
+    AccountUserService,
     NewPaymentservice,
     AccountsService,
     StorageService,

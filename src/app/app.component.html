@@ -1,8 +1,8 @@
 <mat-toolbar *ngIf="isAuthenticated">
     <div class="container">
-        <a mat-button routerLink="/">Badzeet</a>
+        <a mat-button routerLink="/" [queryParams]="{budgetId:budgetId}">Badzeet</a>
         <a mat-button [routerLink]="['/payments']" [queryParams]="{budgetId:budgetId}">List</a>
-        <a mat-button color="primary" [routerLink]="['/new-payment']">New</a>
+        <a mat-button color="primary" [routerLink]="['/new-payment']" [queryParams]="{budgetId:budgetId}">New</a>
         <button mat-button class="right" color="primary" (click)="logOut()">
       Logout
     </button>

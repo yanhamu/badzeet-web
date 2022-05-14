@@ -15,7 +15,7 @@ export class AppComponent {
     private oidcSecurityService: OidcSecurityService,
     private accountService: AccountsService,
     private route: ActivatedRoute) { }
-    
+
   title = 'badzeet-web';
   isAuthenticated = false;
   accountId: number;
@@ -34,7 +34,6 @@ export class AppComponent {
     let params = this.route.snapshot.queryParams
     let nullOrEmpty = (x: string) => x == null || x == '';
     this.budgetId = params['budgetId'];
-
     if (nullOrEmpty(params['budgetId'])) {
       this.budgetId = this.getCurrentBudgetId(account.firstDayOfTheBudget);
       this.router.navigate([], {

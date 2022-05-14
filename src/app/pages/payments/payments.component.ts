@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/services/account-users/user';
 import { BudgetService } from 'src/app/services/budget/budget.service';
 import { Category } from 'src/app/services/categories/category';
@@ -23,8 +23,9 @@ export class PaymentsComponent implements OnInit {
 
   constructor(private paymentService: PaymentsService,
     private storageService: StorageService,
-    private budgetService:BudgetService,
-    private route: ActivatedRoute) {
+    private budgetService: BudgetService,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
   isGroup(index, item): boolean {
@@ -47,13 +48,12 @@ export class PaymentsComponent implements OnInit {
       })
       .then((data) => {
         this.users = data;
-        return this.loadPayments(accountId, this.budgetId, this.from, this.to, this.categories, this.users);
+        return this.loadPayments(accountId, this.budgetId, this.categories, this.users);
       });
-
   }
 
-  loadPayments(accountId: number, budgetId: number, from: Date, to: Date, categoryMap: any, userMap: any) {
-    this.paymentService.getPayments(accountId, from, to, PaymentType.Normal)
+  loadPayments(accountId: number, budgetId: number, categoryMap: any, userMap: any) {
+    this.paymentService.getPayments(accountId, this.from, this.to, PaymentType.Normal)
       .subscribe((data: Payment[]) => {
         let date: Date = null;
         let result: (PaymentDto | PaymentGroup)[] = [];
@@ -73,6 +73,14 @@ export class PaymentsComponent implements OnInit {
         });
         this.paymentsGrouped = result;
       });
+  }
+
+  async setBudgetId(budgetId: number) {
+    this.budgetId = budgetId;
+    let intervals = await this.budgetService.getBudgetInterval(this.budgetId);
+    this.from = intervals.from;
+    this.to = intervals.to;
+    this.loadPayments(this.storageService.getAccount().id, this.budgetId, this.categories, this.users);
   }
 }
 

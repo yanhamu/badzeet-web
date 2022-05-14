@@ -17,7 +17,7 @@ export class NavigationComponent implements OnInit {
     setBudgetId: EventEmitter<number> = new EventEmitter<number>();
 
     ngOnInit(): void {
-        
+
         let year = Number(this.budgetId.toString().substring(0, 4));
         let month = Number(this.budgetId.toString().substring(4, 6));
         let current = new Date();
@@ -36,7 +36,7 @@ export class NavigationComponent implements OnInit {
         this.month = month.toString().padStart(2, "0");
     }
 
-    ngOnChanges(changes:SimpleChanges){
+    ngOnChanges(changes: SimpleChanges) {
         this.ngOnInit();
     }
 

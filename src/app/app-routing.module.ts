@@ -7,10 +7,11 @@ import { NewPaymentComponent } from './pages/new-payment/new-payment.component';
 import { AuthGuard } from './auth/auth-guard';
 import { EditPaymentComponent } from './pages/edit-payment/edit-payment.component';
 import { BudgetBuilderComponent } from './components/budget-builder/budget-builder.component';
+import { IndexComponent } from './pages/index/index.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', pathMatch: 'full', component: IndexComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'new-budget', component: BudgetBuilderComponent, canActivate: [AuthGuard] },
   { path: 'new-payment', component: NewPaymentComponent, canActivate: [AuthGuard] },
   { path: 'payments/:id', component: EditPaymentComponent, canActivate: [AuthGuard] },

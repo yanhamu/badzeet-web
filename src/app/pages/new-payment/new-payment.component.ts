@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AccountUserService } from 'src/app/services/account-users/account-user.service';
 import { User } from 'src/app/services/account-users/user';
@@ -29,6 +29,7 @@ export class NewPaymentComponent implements OnInit {
 
   paymentTypes = [{ id: 1, name: "Normal" }, { id: 3, name: "Pending" }];
   accountId: number;
+  budgetId: number;
 
   constructor(
     private categoryService: CategoryService,
@@ -36,6 +37,7 @@ export class NewPaymentComponent implements OnInit {
     private oidcSecurityService: OidcSecurityService,
     private newPaymentService: NewPaymentservice,
     private router: Router,
+    private route: ActivatedRoute,
     private storageService: StorageService) { }
 
   async ngOnInit() {
@@ -45,13 +47,22 @@ export class NewPaymentComponent implements OnInit {
     this.newPayment.date = new Date();
     let userId = this.oidcSecurityService.getUserData().sub;
     this.newPayment.userId = userId;
+
+    let params = this.route.snapshot.queryParams;
+    this.budgetId = params['budgetId'] == '' ? null : params['budgetId'];
   }
 
   onSave() {
     this.newPaymentService.createPayment(this.accountId, this.newPayment)
       .toPromise()
       .then(r => {
-        this.router.navigate(['/payments']);
+        this.router.navigate(
+          [''],
+          {
+            queryParams: {
+              budgetId: this.budgetId,
+            }
+          });
       });
   }
 }

@@ -17,9 +17,9 @@ export class DashboardComponent implements OnInit {
   budgetId: number;
   hasBudget: boolean = false;
 
-  ngOnInit() {
-    this.route.queryParamMap.subscribe(value => {
-      this.init(value);
+  async ngOnInit() {
+    this.route.queryParamMap.subscribe(async value => {
+      await this.init(value);
     });
   }
 
@@ -29,9 +29,9 @@ export class DashboardComponent implements OnInit {
     this.hasBudget = budget != null;
   }
 
-  ngOnChanges(changes:SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     this.ngOnInit();
-}
+  }
 
   newBudget() {
     this.router.navigate(['/new-budget', { budgetId: this.budgetId }]);
