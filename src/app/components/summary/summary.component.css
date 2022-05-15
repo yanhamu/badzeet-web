@@ -1,7 +1,8 @@
 th {
     text-align: left;
+    padding-right: 10px;
 }
 
 td {
-    text-align: left;
+    text-align: right;
 }

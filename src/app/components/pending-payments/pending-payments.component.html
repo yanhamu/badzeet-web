@@ -3,9 +3,14 @@
     <table>
         <tr *ngFor="let payment of payments">
             <th>{{payment.description}}</th>
-            <td>{{payment.amount}}</td>
+            <td>{{payment.amount | number}}</td>
             <td>{{payment.category}}</td>
             <td>{{payment.owner}}</td>
+            <td class="action">
+                <button class="mat-icon-button" color="primary" (click)="openDialog(payment)">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </td>
         </tr>
 
     </table>

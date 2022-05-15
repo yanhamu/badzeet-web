@@ -30,7 +30,6 @@ export class PaymentsService {
 
     getUsers(accountId: number) {
         return this.accountUserService.getUserMap(accountId);
-
     }
 
     update(accountId: number, paymentId: number, payment: Payment) {

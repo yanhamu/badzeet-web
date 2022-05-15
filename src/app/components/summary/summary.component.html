@@ -4,27 +4,27 @@
         <table>
             <tr>
                 <th>Budget</th>
-                <td>{{summary.budget}}</td>
+                <td>{{summary.budget | number}}</td>
             </tr>
             <tr>
                 <th>Spend</th>
-                <td>{{summary.spend}}</td>
+                <td>{{summary.spend | number}}</td>
             </tr>
             <tr>
                 <th>Remaining</th>
-                <td>{{summary.remainingBudget}}</td>
+                <td>{{summary.remainingBudget | number}}</td>
             </tr>
             <tr>
                 <th>Remaining Daily Avg</th>
-                <td>{{summary.remainingDailyBudget}}</td>
+                <td>{{summary.remainingDailyBudget | number:'1.0-2'}}</td>
             </tr>
             <tr>
                 <th>Pending Payments</th>
-                <td>{{summary.pendingPayments}}</td>
+                <td>{{summary.pendingPayments | number}}</td>
             </tr>
             <tr>
                 <th>Days Left</th>
-                <td>{{summary.remainingDays}}</td>
+                <td>{{summary.remainingDays | number}}</td>
             </tr>
         </table>
     </mat-card>
