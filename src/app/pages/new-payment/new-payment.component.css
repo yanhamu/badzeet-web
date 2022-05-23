@@ -6,6 +6,15 @@
     padding: 0% 5% 0% 5%;
 }
 
-.container>* {
-    margin-top: 10px;
+mat-form-field.mat-form-field {
+    font-size: 16px;
+}
+
+.row-container {
+    display: inline-flex;
+}
+
+.category {
+    padding-left: 10px;
+    flex-grow: 2;
 }
