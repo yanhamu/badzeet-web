@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
     private paymentService: PaymentsService,
     private accountService: AccountsService) { }
 
+  isLoading:boolean = true;
   budgetId: number;
   hasBudget: boolean = false;
   pendingPayments: PendingPaymentDto[]
@@ -33,6 +34,7 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
     this.route.queryParamMap.subscribe(async value => {
       await this.init(value);
+      this.isLoading = false;
     });
   }
 
@@ -41,7 +43,7 @@ export class DashboardComponent implements OnInit {
     let budget = await this.budgetService.getBudget(this.budgetId);
     this.hasBudget = budget != null;
     let account = await this.accountService.getAccount();
-    this.categoryMap = await this.paymentService.getCategories(account.id);
+    this.categoryMap = await this.paymentService.initializeCategories(account.id);
     this.userMap = await this.paymentService.getUsers(account.id);
     await this.loadPendingPayments(account.id);
   }

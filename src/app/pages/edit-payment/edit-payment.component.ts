@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable } from "rxjs";
 import { AccountUserService } from "src/app/services/account-users/account-user.service";
 import { User } from "src/app/services/account-users/user";
 import { Category } from "src/app/services/categories/category";
@@ -38,6 +37,8 @@ export class EditPaymentComponent implements OnInit {
         private accountUserService: AccountUserService) {
     }
 
+    isLoading: boolean = true;
+
     async ngOnInit() {
         this.accountId = this.storageService.getAccount().id;
         this.categories = await this.categoryService.listCategories(this.accountId);
@@ -46,6 +47,7 @@ export class EditPaymentComponent implements OnInit {
         let params = this.route.snapshot.params;
         this.id = Number(params['id']);
         this.payment = await this.paymentService.getPayment(this.accountId, this.id).toPromise();
+        this.isLoading = false;
     }
 
     paymentTypes = [{ id: 1, name: "Normal" }, { id: 2, name: 'Scheduled' }, { id: 3, name: "Pending" }];
@@ -54,8 +56,8 @@ export class EditPaymentComponent implements OnInit {
 
     onSave() {
         this.paymentService.update(this.accountId, this.id, this.payment
-            ).toPromise()
-            .then(r=>{
+        ).toPromise()
+            .then(r => {
                 this.router.navigate(['/payments']);
             });
     }

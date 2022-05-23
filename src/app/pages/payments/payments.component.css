@@ -1,3 +1,22 @@
-table {
-    width: 100%;
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.mat-cell {
+    padding-right: 20px;
+}
+
+.mat-cell:last-child {
+    padding-right: 5px;
+}
+
+.group-td {
+    text-align: center;
+}
+
+.group-tr {
+    height: 28px;
+    background-color: lavender;
 }

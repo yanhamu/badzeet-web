@@ -1,5 +1,5 @@
 <app-navigation [budgetId]="budgetId" (setBudgetId)="setBudgetId($event)"></app-navigation>
-<div>
+<div class="container">
     <table mat-table [dataSource]="paymentsGrouped">
         <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef> Description </th>
@@ -27,7 +27,7 @@
         </ng-container>
 
         <ng-container matColumnDef="group">
-            <th mat-header-cell *matCellDef="let group" [attr.colspan]="6">{{group.date | date}}</th>
+            <td mat-cell class="group-td" *matCellDef="let group" [attr.colspan]="5">{{group.date | date}}</td>
         </ng-container>
 
         <ng-container matColumnDef="action">
@@ -39,8 +39,8 @@
             </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="['space', 'description', 'amount', 'category', 'owner', 'action']"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['group']; when isGroup"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['space', 'description', 'amount', 'category', 'owner', 'action'];"></tr>
+        <tr mat-header-row *matHeaderRowDef="['description', 'amount', 'category', 'owner', 'action']"></tr>
+        <tr mat-row class="group-tr" *matRowDef="let row; columns: ['group']; when isGroup"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['description', 'amount', 'category', 'owner', 'action'];"></tr>
     </table>
 </div>

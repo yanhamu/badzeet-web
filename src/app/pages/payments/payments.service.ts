@@ -28,6 +28,11 @@ export class PaymentsService {
         return this.categoryService.getCategoryMap(accountId);
     }
 
+    async initializeCategories(accountId: number) {
+        await this.categoryService.initialize(accountId);
+        return this.categoryService.getCategoryMap(accountId);
+    }
+
     getUsers(accountId: number) {
         return this.accountUserService.getUserMap(accountId);
     }

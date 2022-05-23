@@ -30,6 +30,7 @@ export class NewPaymentComponent implements OnInit {
   paymentTypes = [{ id: 1, name: "Normal" }, { id: 3, name: "Pending" }];
   accountId: number;
   budgetId: number;
+  isLoading: boolean = true;
 
   constructor(
     private categoryService: CategoryService,
@@ -50,6 +51,7 @@ export class NewPaymentComponent implements OnInit {
 
     let params = this.route.snapshot.queryParams;
     this.budgetId = params['budgetId'] == '' ? null : params['budgetId'];
+    this.isLoading = false;
   }
 
   onSave() {

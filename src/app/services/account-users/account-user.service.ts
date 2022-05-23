@@ -9,20 +9,34 @@ const baseUrl = `${environment.baseUrl}/api/`;
 export class AccountUserService {
     constructor(private httpClient: HttpClient) { }
 
+    users: User[] = null;
+    userMap: { [id: string]: User } = null;
+
     getUsers(accountId: number) {
         return this.httpClient.get<User[]>(baseUrl + `accounts/${accountId}/users`);
     }
 
     async listUsers(accountId: number) {
-        return await this.httpClient.get<User[]>(baseUrl + `accounts/${accountId}/users`).toPromise();
+        if (this.users == null) {
+            await this.initializeUsers(accountId);
+        }
+        return this.users;
     }
 
     async getUserMap(accountId: number) {
-        const users = await this.getUsers(accountId).toPromise();
+        if (this.userMap == null) {
+            await this.initializeUsers(accountId);
+        }
+        return this.userMap;
+    }
+
+    async initializeUsers(accountId: number) {
+        const users = await this.httpClient.get<User[]>(baseUrl + `accounts/${accountId}/users`).toPromise();
+        this.users = users;
         let result: { [id: string]: User; } = {};
-        users.forEach(user=>{
+        users.forEach(user => {
             result[user.id] = user;
         });
-        return result;
+        this.userMap = result;
     }
 }

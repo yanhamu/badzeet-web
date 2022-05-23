@@ -10,21 +10,36 @@ const baseUrl = `${environment.baseUrl}/api/`;
 export class CategoryService {
     constructor(private httpClient: HttpClient) { }
 
+    categoryMap: { [id: string]: Category } = null;
+    categories: Category[] = null;
+
     getCategories(accountId: number): Observable<Category[]> {
         return this.httpClient.get<Category[]>(baseUrl + `accounts/${accountId}/categories`);
     }
 
-    listCategories(accountId: number) {
-        return this.getCategories(accountId).toPromise();
+    async listCategories(accountId: number) {
+        if (this.categories == null) {
+            await this.initialize(accountId);
+        }
+        return this.categories;
     }
 
     async getCategoryMap(accountId: number) {
-        const categories = await this.getCategories(accountId)
-            .toPromise();
+
+        if (this.categoryMap == null) {
+            await this.initialize(accountId);
+        }
+
+        return this.categoryMap;
+    }
+
+    async initialize(accountId: number) {
+        const categories = await this.getCategories(accountId).toPromise();
+        this.categories = categories;
         let result: { [id: string]: Category; } = {};
         categories.forEach(category => {
             result[category.id] = category;
         });
-        return result;
+        this.categoryMap = result;
     }
 }

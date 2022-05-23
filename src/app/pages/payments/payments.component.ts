@@ -28,6 +28,8 @@ export class PaymentsComponent implements OnInit {
     private router: Router) {
   }
 
+  isLoading: boolean = true;
+
   isGroup(index, item): boolean {
     return item.date;
   }
@@ -49,7 +51,8 @@ export class PaymentsComponent implements OnInit {
       .then((data) => {
         this.users = data;
         return this.loadPayments(accountId, this.budgetId, this.categories, this.users);
-      });
+      })
+      .then(() => this.isLoading = false);
   }
 
   loadPayments(accountId: number, budgetId: number, categoryMap: any, userMap: any) {
