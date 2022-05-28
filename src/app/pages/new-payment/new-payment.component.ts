@@ -6,6 +6,8 @@ import { User } from 'src/app/services/account-users/user';
 import { Category } from 'src/app/services/categories/category';
 import { CategoryService } from 'src/app/services/categories/category.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { PaymentType } from '../payments/payment-type';
+import { PaymentsService } from '../payments/payments.service';
 import { NewPaymentDto } from './new-payment';
 import { NewPaymentservice } from './new-payment.service';
 
@@ -27,7 +29,7 @@ export class NewPaymentComponent implements OnInit {
     type: 1
   };
 
-  paymentTypes = [{ id: 1, name: "Normal" }, { id: 3, name: "Pending" }];
+  paymentTypes: PaymentType[];
   accountId: number;
   budgetId: number;
   isLoading: boolean = true;
@@ -39,9 +41,11 @@ export class NewPaymentComponent implements OnInit {
     private newPaymentService: NewPaymentservice,
     private router: Router,
     private route: ActivatedRoute,
-    private storageService: StorageService) { }
+    private storageService: StorageService,
+    private paymentService: PaymentsService) { }
 
   async ngOnInit() {
+    this.paymentTypes = this.paymentService.getPaymentTypes();
     this.accountId = this.storageService.getAccount().id
     this.categories = await this.categoryService.listCategories(this.accountId);
     this.users = await this.accountUserService.listUsers(this.accountId);

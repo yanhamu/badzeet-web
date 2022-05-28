@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card'
+import { MatDialogModule } from '@angular/material/dialog';
 
 const modules = [
   MatFormFieldModule,
@@ -22,7 +23,8 @@ const modules = [
   MatTableModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatCardModule 
+  MatCardModule,
+  MatDialogModule,
 ];
 
 @NgModule({

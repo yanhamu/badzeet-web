@@ -12,6 +12,7 @@ import { EditPaymentComponent } from './pages/edit-payment/edit-payment.componen
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { BudgetBuilderComponent } from './components/budget-builder/budget-builder.component';
 import { PendingPaymentsComponent } from './components/pending-payments/pending-payments.component';
+import { PendingPaymentDialog } from './components/pending-payment-dialog/pending-payment-dialog.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
@@ -41,7 +42,8 @@ import { IndexComponent } from './pages/index/index.component';
     SummaryComponent,
     BudgetBuilderComponent,
     PendingPaymentsComponent,
-    IndexComponent
+    IndexComponent,
+    PendingPaymentDialog
   ],
   imports: [
     BrowserModule,

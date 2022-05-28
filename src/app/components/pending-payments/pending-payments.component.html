@@ -1,17 +1,16 @@
 <mat-card>
     <mat-card-title>Pending payments</mat-card-title>
     <table>
-        <tr *ngFor="let payment of payments">
+        <tr *ngFor="let payment of pendingPayments">
             <th>{{payment.description}}</th>
             <td>{{payment.amount | number}}</td>
-            <td>{{payment.category}}</td>
-            <td>{{payment.owner}}</td>
+            <td>{{this.categoryMap[payment.categoryId].name}}</td>
+            <td>{{this.userMap[payment.userId].nick}}</td>
             <td class="action">
                 <button class="mat-icon-button" color="primary" (click)="openDialog(payment)">
                     <mat-icon>more_vert</mat-icon>
                 </button>
             </td>
         </tr>
-
     </table>
 </mat-card>

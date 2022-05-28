@@ -4,7 +4,7 @@ import { User } from 'src/app/services/account-users/user';
 import { BudgetService } from 'src/app/services/budget/budget.service';
 import { Category } from 'src/app/services/categories/category';
 import { StorageService } from 'src/app/services/storage/storage.service';
-import { Payment, PaymentType } from './payment';
+import { Payment, PaymentTypeEnum } from './payment';
 import { PaymentsService } from './payments.service';
 
 @Component({
@@ -56,7 +56,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   loadPayments(accountId: number, budgetId: number, categoryMap: any, userMap: any) {
-    this.paymentService.getPayments(accountId, this.from, this.to, PaymentType.Normal)
+    this.paymentService.getPayments(accountId, this.from, this.to, PaymentTypeEnum.Normal)
       .subscribe((data: Payment[]) => {
         let date: Date = null;
         let result: (PaymentDto | PaymentGroup)[] = [];

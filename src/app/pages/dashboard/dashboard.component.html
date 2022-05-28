@@ -4,7 +4,7 @@
         <app-navigation [budgetId]="budgetId" (setBudgetId)="setBudgetId($event)"></app-navigation>
         <summary *ngIf="hasBudget" [budgetId]="budgetId"></summary>
         <br />
-        <pending-payments *ngIf="hasPending()" [budgetId]="budgetId" [payments]="pendingPayments"></pending-payments>
+        <pending-payments *ngIf="hasPending()" [budgetId]="budgetId" [payments]="pendingPayments" [accountId]="accountId"></pending-payments>
     </div>
 </div>
 

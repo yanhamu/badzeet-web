@@ -6,10 +6,10 @@ export interface Payment {
     amount: number,
     categoryId: number,
     userId: string,
-    type: PaymentType
+    type: PaymentTypeEnum
 }
 
-export enum PaymentType {
+export enum PaymentTypeEnum {
     Normal = 1,
     Scheduled = 2,
     Pending = 3

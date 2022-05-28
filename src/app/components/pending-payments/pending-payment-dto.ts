@@ -1,8 +1,6 @@
-export interface PendingPaymentDto {
-    id: number,
-    amount: number,
+import { Payment } from "src/app/pages/payments/payment";
+
+export interface PendingPaymentDto extends Payment {
     category: string,
-    description: string,
     owner: string,
-    date: Date
 }
