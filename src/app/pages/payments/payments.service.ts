@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 import { CategoryService } from "src/app/services/categories/category.service";
 import { AccountUserService } from "src/app/services/account-users/account-user.service";
 import { PaymentType } from "./payment-type";
+import { Observable } from "rxjs";
 
 const baseUrl = `${environment.baseUrl}/api/`;
 
@@ -29,7 +30,7 @@ export class PaymentsService {
         return this.categoryService.getCategoryMap(accountId);
     }
 
-    getPaymentTypes():PaymentType[] {
+    getPaymentTypes(): PaymentType[] {
         return [{ id: 1, name: "Normal" }, { id: 3, name: "Pending" }];
     }
 
@@ -42,7 +43,7 @@ export class PaymentsService {
         return this.accountUserService.getUserMap(accountId);
     }
 
-    update(accountId: number, paymentId: number, payment: Payment) {
+    update(accountId: number, paymentId: number, payment: Payment): Observable<Payment> {
         return this.httpClient.put<Payment>(baseUrl + `accounts/${accountId}/payments/${paymentId}`, payment);
     }
 }

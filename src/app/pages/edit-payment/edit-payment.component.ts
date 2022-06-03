@@ -38,16 +38,17 @@ export class EditPaymentComponent implements OnInit {
     }
 
     isLoading: boolean = true;
+    budgetId: number;
 
     async ngOnInit() {
         this.accountId = this.storageService.getAccount().id;
         this.categories = await this.categoryService.listCategories(this.accountId);
         this.users = await this.accountUserService.listUsers(this.accountId);
 
-        let params = this.route.snapshot.params;
-        this.id = Number(params['id']);
+        this.id = Number(this.route.snapshot.params['id']);
         this.payment = await this.paymentService.getPayment(this.accountId, this.id).toPromise();
         this.isLoading = false;
+        this.budgetId = this.route.snapshot.queryParams['budgetId'];
     }
 
     paymentTypes = [{ id: 1, name: "Normal" }, { id: 2, name: 'Scheduled' }, { id: 3, name: "Pending" }];
@@ -55,10 +56,16 @@ export class EditPaymentComponent implements OnInit {
     users: User[];
 
     onSave() {
-        this.paymentService.update(this.accountId, this.id, this.payment
-        ).toPromise()
+        this.paymentService.update(this.accountId, this.id, this.payment)
+            .toPromise()
             .then(r => {
-                this.router.navigate(['/payments']);
+                this.router.navigate(
+                    ['/payments'],
+                    {
+                        queryParams: {
+                            budgetId: this.budgetId,
+                        }
+                    });
             });
     }
 }
